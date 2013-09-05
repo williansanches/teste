@@ -6,7 +6,7 @@ var idcodigo;
 var idnome;
 var chamaT1;
 function chamat1() {
-    chamaT1 = window.open('T1.apk', '');
+    chamaT1 = window.open('/data/data/totalcross.apptopt', '');
     camaT1.show;
 }
 function idTable(idTable) {
