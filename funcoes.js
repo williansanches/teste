@@ -6,7 +6,7 @@ var idcodigo;
 var idnome;
 var chamaT1;
 document.addEventListener("backbutton", function(e){
-    if($.mobile.activePage.is('#homepage')){
+    if($.mobile.activePage.is('#menu')){
         e.preventDefault();
         navigator.app.exitApp();
     }
@@ -14,7 +14,6 @@ document.addEventListener("backbutton", function(e){
         navigator.app.backHistory()
     }
 }, false);
-
 function chamat1() {
     chamaT1 = window.open('/data/data/totalcross.apptopt', '');
     camaT1.show;
