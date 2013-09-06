@@ -7,6 +7,7 @@ var idnome;
 var chamaT1;
 document.addEventListener("backbutton", function(e){
     if($.mobile.activePage.is('#menu')){
+        alert('passou');
         e.preventDefault();
         navigator.app.exitApp();
     }
