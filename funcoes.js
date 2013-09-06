@@ -15,6 +15,9 @@ document.addEventListener("backbutton", function(e){
         navigator.app.backHistory()
     }
 }, false);
+function saiapp(){
+    device.exitApp();
+}
 function chamat1() {
     chamaT1 = window.open('/data/data/totalcross.apptopt', '');
     camaT1.show;
