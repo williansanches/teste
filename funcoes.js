@@ -16,7 +16,9 @@ document.addEventListener("backbutton", function(e){
     }
 }, false);
 function saiapp(){
+    if(confirm('Deseja mesmo sair?')){
     device.exitApp();
+    }
 }
 function chamat1() {
     chamaT1 = window.open('/data/data/totalcross.apptopt', '');
