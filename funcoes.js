@@ -35,8 +35,6 @@ function idNome(idNome) {
 }
 // Wait for device API libraries to load
 //
-document.addEventListener("deviceready", onDeviceReady, false);
-
 // Populate the database
 //
 function abreDB() {
