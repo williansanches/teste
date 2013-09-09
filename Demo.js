@@ -1,15 +1,17 @@
 	String.prototype.format = function() { a = this; for ( k in arguments ) { a = a.replace("{" + k + "}", arguments[k]); } return a; };
-	window.demo = { 
+	try{
+        window.demo = {
+            
 		'version': '3.0-rc1',
 		'ga': 'UA-17614686-5',
-		'primaryUrl': 'http://code.google.com/p/jquery-ui-map/',
+		'primaryUrl': 'jquery-ui-map/',
 		'url': 'http://jquery-ui-map.googlecode.com/', 
 		'forum': 'http://groups.google.com/group/jquery-ui-map-discuss/feed/rss_v2_0_msgs.xml', 
 		'subscribe': 'http://groups.google.com/group/jquery-ui-map-discuss/boxsubscribe', 
 		'exception': 'Unable to load due to either poor internet connection or some CDN\'s aren\'t as responsive as we would like them to be. Try refreshing the page :D.', 
 		'init': function() {
 			window._gaq = [['_setAccount', this.ga], ['_trackPageview'], ['_trackPageLoadTime']];
-			Modernizr.load({ 'test': ( location.href.indexOf(this.url) > -1 ), 'yep': 'http://www.google-analytics.com/ga.js' });
+			Modernizr.load({ 'test': ( location.href.indexOf(this.url) > -1 ), 'yep': 'ga.js' });
 			this.test('Backbone', function() {
 				$('#forum').append('<h2>Forum</h2><ul id="forum_posts"></ul><h2>Subscribe</h2><form id="forum_subscribe" class="subscribe" action="#"><label for="email">E-mail:</label><input id="email" type="text" name="email" /><input type="submit" name="sub" value="Subscribe" /></form>');
 				ForumCollection = Backbone.Collection.extend({ 'url': 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&callback=?&q={0}'.format(encodeURIComponent(demo.forum)), 'parse': function(response) { return response.responseData.feed.entries; } });
@@ -29,6 +31,9 @@
 		'timeStart': function(key, desc) { this.tests[key] = { 'start': new Date().getTime(), 'desc': desc }; },
 		'timeEnd': function(key) { this.tests[key].elapsed = new Date().getTime(); },
 		'report': function(id) { var i = 1; for ( var k in this.tests ) { var t = this.tests[k]; $(id).append('<div class="benchmark rounded"><div class="benchmark-result lt">' + (t.elapsed - t.start) + ' ms</div><div class="lt"><p class="benchmark-iteration">Benchmark case ' + i + '</p><p class="benchmark-title">' + t.desc + '</p></div></div>'); i++; }; }
-	};
+            };
+            }catch(e){
+                
+            }
 		
 	demo.init();
