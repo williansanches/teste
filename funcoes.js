@@ -230,8 +230,18 @@ function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
-    function Sucesso(position) { 
+function Sucesso(position) { 
     var myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    var location = document.getElementById('geoLocation');
+    location.innerHTML=
+         ('Latitude: '          + position.coords.latitude          + '<br/>' + 
+          'Longitude: '         + position.coords.longitude         + '<br/>' +
+          'Altitude: '          + position.coords.altitude          + '<br/>' +
+          'Accuracy: '          + position.coords.accuracy          + '<br/>' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br/>' +
+          'Heading: '           + position.coords.heading           + '<br/>' +
+          'Speed: '             + position.coords.speed             + '<br/>' +
+          'Timestamp: '         + new Date(position.timestamp)      + '<br/>');
     map  = new google.maps.Map(document.getElementById('geo'), {
 	mapTypeId: google.maps.MapTypeId.ROADMAP,
 	center: myLocation,
