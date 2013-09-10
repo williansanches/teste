@@ -222,7 +222,7 @@ try {
 } catch (e) {
     alert("Erro " + e);
 }*/
-google.maps.event.addDomListener(window, 'load', DeviceReady); 
+google.maps.event.addDomListener(window, 'click', DeviceReady); 
 function DeviceReady() {
         navigator.geolocation.getCurrentPosition(Sucesso,onError,{timeout:10000});
     }
