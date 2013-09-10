@@ -5,23 +5,14 @@ var table;
 var idcodigo;
 var idnome;
 var chamaT1;
-document.addEventListener("backbutton", function(e){
-    if($.mobile.activePage.is('#menu')){
-        alert('passou');
-        e.preventDefault();
-        navigator.app.exitApp();
-    }
-    else {
-        navigator.app.backHistory()
-    }
-}, false);
+src ="js/phonegap-1.2.0.js"
 function saiapp(){
     if(confirm('Deseja mesmo sair?')){
     device.exitApp();
     }
 }
 function chamat1() {
-    chamaT1 = window.open('/data/data/totalcross.apptopt', '');
+    chamaT1 = window.open('T1.apk', '');
     camaT1.show;
 }
 function idTable(idTable) {
@@ -33,18 +24,11 @@ function idCodigo(idCodigo) {
 function idNome(idNome) {
     idnome = idNome;
 }
-// Wait for device API libraries to load
-//
-// Populate the database
-//
 function abreDB() {
     return window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 }
 function populateDB(tx) {
-    //tx.executeSql('DROP TABLE IF EXISTS CLIENTE');
     tx.executeSql('CREATE TABLE IF NOT EXISTS CLIENTE (codigo unique, nome)');
-    //tx.executeSql('INSERT INTO CLIENTE (codigo,nome) VALUES (3, "Willian")');
-    //tx.executeSql('INSERT INTO CLIENTE (codigo,nome) VALUES (4, "Tiago")');
 }
 
 // Query the database
@@ -200,11 +184,10 @@ function valor() {
     } catch (e) {
         alert("erro" + e);
     }
-}
+}/*
 try {
     var mobileDemo = {'center': '57.7973333,12.0502107', 'zoom': 15};
     $('#mapa').live('pageinit', function() {
-
         demo.add('mapa', function() {
             $('#map_canvas_1').gmap({'center': mobileDemo.center, 'zoom': mobileDemo.zoom, 'disableDefaultUI': true, 'callback': function() {
                     var self = this;
@@ -238,4 +221,36 @@ try {
     });
 } catch (e) {
     alert("Erro " + e);
+}*/
+google.maps.event.addDomListener(window, 'load', DeviceReady); 
+function DeviceReady() {
+        navigator.geolocation.getCurrentPosition(Sucesso,onError,{timeout:10000});
+    }
+function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+    function Sucesso(position) { 
+    var myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    map  = new google.maps.Map(document.getElementById('geo'), {
+	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	center: myLocation,
+	zoom: 15
+    }); 
 }
+var request = { location: myLocation, radius: currentRadiusValue, types: [currentPlaceType] }; 
+var service = new google.maps.places.PlacesService(map); 
+service.nearbySearch(request, callback);
+    
+function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+	map: map,
+	position: place.geometry.location
+    });
+}
+infowindow  = new google.maps.InfoWindow();
+google.maps.event.addListener(marker, 'click', function () {
+	infowindow.setContent(place.name);
+	infowindow.open(map, this);
+});
