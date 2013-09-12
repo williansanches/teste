@@ -8,7 +8,7 @@ var chamaT1;
 src ="js/phonegap-1.2.0.js";
 function saiapp(){
     if(confirm('Deseja mesmo sair?')){
-        navigator.device.exitApp();
+        device.exitApp();
     }
 }
 function chamat1() {
