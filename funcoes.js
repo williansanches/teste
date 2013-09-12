@@ -5,10 +5,10 @@ var table;
 var idcodigo;
 var idnome;
 var chamaT1;
-src ="js/phonegap-1.2.0.js"
+src ="js/phonegap-1.2.0.js";
 function saiapp(){
     if(confirm('Deseja mesmo sair?')){
-    device.exitApp();
+        navigator.device.exitApp();
     }
 }
 function chamat1() {
@@ -184,47 +184,20 @@ function valor() {
     } catch (e) {
         alert("erro" + e);
     }
-}/*
-try {
-    var mobileDemo = {'center': '57.7973333,12.0502107', 'zoom': 15};
-    $('#mapa').live('pageinit', function() {
-        demo.add('mapa', function() {
-            $('#map_canvas_1').gmap({'center': mobileDemo.center, 'zoom': mobileDemo.zoom, 'disableDefaultUI': true, 'callback': function() {
-                    var self = this;
-                    self.set('getCurrentPosition', function() {
-                        self.refresh();
-                        self.getCurrentPosition(function(position, status) {
-                            if (status === 'OK') {
-                                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-                                self.get('map').panTo(latlng);
-                                self.search({'location': latlng}, function(results, status) {
-                                    if (status === 'OK') {
-                                        $('#from').val(results[0].formatted_address);
-                                    }
-                                });
-                            } else {
-                                alert('Unable to get current position');
-                            }
-                        });
-                    });
-                    $('#submit').click(function() {
-                        self.displayDirections({'origin': $('#from').val(), 'destination': $('#to').val(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING}, {'panel': document.getElementById('directions')}, function(response, status) {
-                            (status === 'OK') ? $('#results').show() : $('#results').hide();
-                        });
-                        return false;
-                    });
-                }});
-        }).load('mapa');
-    });
-    $('#mapa').live('pageshow', function() {
-        demo.add('mapa', $('#map_canvas_1').gmap('get', 'getCurrentPosition')).load('mapa');
-    });
-} catch (e) {
-    alert("Erro " + e);
-}*/
-google.maps.event.addDomListener(window, 'click', DeviceReady); 
+}
+google.maps.event.addDomListener(window, 'load', DeviceReady);
+document.addEventListener("online", testaconect(true) ,false);
+document.addEventListener("offline", testaconect(false) ,false);
+function testaconect(va){
+    if(va){
+        alert("Conectou");
+    }else{
+        alert("desconectado");
+    }
+    DeviceReady;
+}
 function DeviceReady() {
-        navigator.geolocation.getCurrentPosition(Sucesso,onError,{timeout:10000});
+        navigator.geolocation.getCurrentPosition(Sucesso,onError,{timeout:10000,enableHighAccuracy:false});
     }
 function onError(error) {
         alert('code: '    + error.code    + '\n' +
@@ -246,7 +219,9 @@ function Sucesso(position) {
 	mapTypeId: google.maps.MapTypeId.ROADMAP,
 	center: myLocation,
 	zoom: 15
+        
     }); 
+    createMarker(myLocation);
 }
 var request = { location: myLocation, radius: currentRadiusValue, types: [currentPlaceType] }; 
 var service = new google.maps.places.PlacesService(map); 
@@ -259,8 +234,11 @@ function createMarker(place) {
 	position: place.geometry.location
     });
 }
-infowindow  = new google.maps.InfoWindow();
-google.maps.event.addListener(marker, 'click', function () {
-	infowindow.setContent(place.name);
-	infowindow.open(map, this);
-});
+function trocaContent(idDiv,valor){
+    objDiv = document.getElementById(idDiv);
+    if(valor){
+        objDiv.style.display = "";
+    }else{
+        objDiv.style.display = "none"
+    }
+}
