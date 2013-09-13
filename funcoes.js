@@ -197,7 +197,7 @@ function testaconect(va){
     DeviceReady;
 }
 function DeviceReady() {
-        navigator.geolocation.getCurrentPosition(Sucesso,onError,{timeout:10000,enableHighAccuracy:true});
+        navigator.geolocation.getCurrentPosition(Sucesso,onError,{maximumAge:3000,timeout:10000,enableHighAccuracy:true});
     }
 function onError(error) {
         alert('code: '    + error.code    + '\n' +
